@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rutanvini Beauty Care Booking</title>
+    <style>
+        body {
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            background-color: #fce4ec;
+            padding: 20px;
+        }
+        h2 {
+            text-align: center;
+            color: #d81b60;
+        }
+        form {
+            max-width: 500px;
+            margin: auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 30px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        input, textarea, select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0 20px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        input:focus, textarea:focus, select:focus {
+            border-color: #d81b60;
+            box-shadow: 0 0 5px rgba(216, 27, 96, 0.5);
+            outline: none;
+        }
+        input[type="submit"] {
+            background-color: #d81b60;
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 8px;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        input[type="submit"]:hover {
+            background-color: #ad1457;
+            transform: scale(1.05);
+        }
+        .service-option {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        #other-text {
+            width: 0;
+            opacity: 0;
+            padding: 5px;
+            transition: width 0.4s ease, opacity 0.4s ease;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        #other-text.show {
+            width: 200px;
+            opacity: 1;
+        }
+        input[type="checkbox"] {
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        input[type="checkbox"]:hover {
+            transform: scale(1.2);
+        }
+        label:hover {
+            color: #ad1457;
+            transition: color 0.3s;
+        }
+    </style>
+    <script>
+        function toggleOtherInput() {
+            const otherCheckbox = document.getElementById('service-other');
+            const otherInput = document.getElementById('other-text');
+            if(otherCheckbox.checked){
+                otherInput.classList.add('show');
+            } else {
+                otherInput.classList.remove('show');
+            }
+        }
+
+        function gatherServices() {
+            const checkboxes = document.querySelectorAll('input[name="services"]:checked');
+            let services = [];
+            checkboxes.forEach(cb => {
+                if(cb.value !== 'Other') {
+                    services.push(cb.value);
+                }
+            });
+            const otherText = document.getElementById('other-text').value.trim();
+            if(document.getElementById('service-other').checked && otherText) {
+                services.push(otherText);
+            }
+            document.getElementById('all-services').value = services.join(", ");
+        }
+
+        function handleSubmit() {
+            gatherServices();
+            alert("Thank you! Your booking has been submitted successfully.");
+            return true; // allow form to submit to Formspree
+        }
+    </script>
+</head>
+<body>
+
+    <h2>Rutanvini Beauty Care Services Booking</h2>
+
+    <form id="bookingForm" action="https://formspree.io/f/your-form-id" method="POST" onsubmit="return handleSubmit()">
+        <label for="name">Full Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="address">Address:</label>
+        <textarea id="address" name="address" rows="3" required></textarea>
+
+        <label for="contact">Contact Number:</label>
+        <input type="tel" id="contact" name="contact" required pattern="[0-9]{10}" placeholder="10-digit number">
+
+        <label>Services Required:</label>
+        <div class="service-option">
+            <input type="checkbox" name="services" value="Makeup" id="service-makeup">
+            <label for="service-makeup">Makeup</label>
+        </div>
+        <div class="service-option">
+            <input type="checkbox" name="services" value="Eyebrow" id="service-eyebrow">
+            <label for="service-eyebrow">Eyebrow</label>
+        </div>
+        <div class="service-option">
+            <input type="checkbox" name="services" value="Facial" id="service-facial">
+            <label for="service-facial">Facial</label>
+        </div>
+        <div class="service-option">
+            <input type="checkbox" name="services" value="Wax" id="service-wax">
+            <label for="service-wax">Wax</label>
+        </div>
+        <div class="service-option">
+            <input type="checkbox" id="service-other" value="Other" onclick="toggleOtherInput()">
+            <label for="service-other">Other</label>
+            <input type="text" id="other-text" placeholder="Please specify">
+        </div>
+
+        <input type="hidden" name="services_combined" id="all-services">
+
+        <label for="date">Preferred Date:</label>
+        <input type="date" id="date" name="date" required>
+
+        <label for="time">Preferred Time Slot:</label>
+        <select id="time" name="time" required>
+            <option value="">Select a time slot</option>
+            <option value="10:00 AM - 11:00 AM">10:00 AM - 11:00 AM</option>
+            <option value="11:00 AM - 12:00 PM">11:00 AM - 12:00 PM</option>
+            <option value="12:00 PM - 01:00 PM">12:00 PM - 01:00 PM</option>
+            <option value="01:00 PM - 02:00 PM">01:00 PM - 02:00 PM</option>
+            <option value="02:00 PM - 03:00 PM">02:00 PM - 03:00 PM</option>
+            <option value="03:00 PM - 04:00 PM">03:00 PM - 04:00 PM</option>
+            <option value="04:00 PM - 05:00 PM">04:00 PM - 05:00 PM</option>
+        </select>
+
+        <input type="hidden" name="_replyto" value="your-email@example.com">
+
+        <input type="submit" value="Book Now">
+    </form>
+
+</body>
+</html>

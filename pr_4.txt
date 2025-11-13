@@ -1,0 +1,30 @@
+<html>
+<main>
+    <h2>Welcome to Rutanvini Beauty Care</h2>
+    <p>Your trusted destination for expert beauty services including eyebrow shaping, facials, hair styling,
+     and bridal makeup.</p>
+
+    <h3>Our Services</h3>
+    <ul>
+        <li>✔️ 1500+ Eyebrows Styled</li>
+        <li>✔️ 200+ Facials Done</li>
+        <li>✔️ Bridal & Party Makeup</li>
+        <li>✔️Internatinal Certified Makeup-Artist</li>
+    </ul>
+
+    <h3>Why Choose Us?</h3>
+    <p>With over 18 years of experience, we offer professional, hygienic, and personalized beauty care 
+    services for every occasion.</p>
+
+    <h3>Special Offer</h3>
+    <p>🎉 Get 10% off your first facial this month! 🎉</p>
+
+    <h3>What Our Clients Say</h3>
+    <blockquote>
+        "Rutanvini Beauty Care gave me the best bridal look! So happy with their service." 
+    </blockquote>
+
+    <h3>Book Now</h3>
+    <p><a href="contact.html">Click here to contact us or book an appointment</a></p>
+</main>
+</html>
